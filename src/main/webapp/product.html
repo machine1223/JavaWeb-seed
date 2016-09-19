@@ -6,7 +6,7 @@
 </head>
 <script src="assets/plugins/flot/jquery.js"></script>
 <body>
-<span id="">
+<span id="proList">
     测试
 </span>
 <script type="text/javascript">
@@ -14,12 +14,11 @@
 
         initProList();
         function initProList(){
-            alert("2222");
             $.ajax({
                 url:"rest/product/info",
                 type:'GET',
                 success:function (data) {
-                    alert(data);
+                    $('#proList').html(JSON.stringify(data));
                 }
             })
         }
