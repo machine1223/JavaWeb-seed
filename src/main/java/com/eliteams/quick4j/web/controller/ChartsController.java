@@ -2,7 +2,7 @@ package com.eliteams.quick4j.web.controller;
 
 import com.eliteams.quick4j.core.entity.MenuModel;
 import com.eliteams.quick4j.core.util.DateUtil;
-import com.eliteams.quick4j.core.util.WordUtil;
+//import com.eliteams.quick4j.core.util.WordUtil;
 import com.eliteams.quick4j.web.model.*;
 import com.eliteams.quick4j.web.service.*;
 import org.springframework.stereotype.Controller;
@@ -73,42 +73,42 @@ public class ChartsController {
      * @param to
      * @return
      */
-    @RequestMapping(value = "/commentByDate", method = RequestMethod.GET)
-    public String commentByDate(Model model,String from, String to) {
-        List<Comment> comments = commentService.selectByDate(from + " 00:00:00",
-                to + " 23:59:59");
-
-        List<String> days = DateUtil.days(from, to);
-        Map<String, Integer> dataMap = new HashMap();
-        Map<String, Integer> userMap = new HashMap(); //评论人数
-        List<String> wordList = new ArrayList();
-        Map<String, Integer> wordMap = new HashMap();
-
-        for (String day:days){     //TODO 这里需要优化，把comments的循环放在外面
-            dataMap.put(day, 0);
-            Set<String> userSet = new HashSet<>();
-            for (Comment comment:comments){
-                if (day.equals (DateUtil.dateToString(comment.getDate()))){
-                    dataMap.put(day, dataMap.get(day)+1);
-                    userSet.add(comment.getName());
-                }
-            }
-            userMap.put(day, userSet.size());
-        }
-
-        for (Comment comment:comments){   //TODO 这里需要优化，把这里的代码合并到上面的循环
-            wordList.addAll(WordUtil.segString(comment.getComment()));
-            wordMap = WordUtil.wordCount(wordList);
-        }
-
-        model.addAttribute("chartData", dataMap);
-        model.addAttribute("chartUserData", userMap);
-        model.addAttribute("comments", comments);
-        model.addAttribute("wordMap", wordMap);
-        model.addAttribute("chartsMenuList", getChartsMenu("commentByDate"));
-
-        return "comment";
-    }
+//    @RequestMapping(value = "/commentByDate", method = RequestMethod.GET)
+//    public String commentByDate(Model model,String from, String to) {
+//        List<Comment> comments = commentService.selectByDate(from + " 00:00:00",
+//                to + " 23:59:59");
+//
+//        List<String> days = DateUtil.days(from, to);
+//        Map<String, Integer> dataMap = new HashMap();
+//        Map<String, Integer> userMap = new HashMap(); //评论人数
+//        List<String> wordList = new ArrayList();
+//        Map<String, Integer> wordMap = new HashMap();
+//
+//        for (String day:days){     //TODO 这里需要优化，把comments的循环放在外面
+//            dataMap.put(day, 0);
+//            Set<String> userSet = new HashSet<>();
+//            for (Comment comment:comments){
+//                if (day.equals (DateUtil.dateToString(comment.getDate()))){
+//                    dataMap.put(day, dataMap.get(day)+1);
+//                    userSet.add(comment.getName());
+//                }
+//            }
+//            userMap.put(day, userSet.size());
+//        }
+//
+//        for (Comment comment:comments){   //TODO 这里需要优化，把这里的代码合并到上面的循环
+//            wordList.addAll(WordUtil.segString(comment.getComment()));
+//            wordMap = WordUtil.wordCount(wordList);
+//        }
+//
+//        model.addAttribute("chartData", dataMap);
+//        model.addAttribute("chartUserData", userMap);
+//        model.addAttribute("comments", comments);
+//        model.addAttribute("wordMap", wordMap);
+//        model.addAttribute("chartsMenuList", getChartsMenu("commentByDate"));
+//
+//        return "comment";
+//    }
 
     /**
      *

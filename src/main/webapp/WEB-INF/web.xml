@@ -83,7 +83,7 @@
 
     <!-- 首页 -->
     <welcome-file-list>
-        <welcome-file>rest/index</welcome-file>
+        <welcome-file>rest/product.html</welcome-file>
     </welcome-file-list>
 
     <!-- 错误页 -->

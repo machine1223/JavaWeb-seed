@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eliteams.quick4j.web.dao.ProductMapper">
+    <resultMap id="BaseResultMap" type="com.eliteams.quick4j.web.model.Product">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="proCode" property="proCode" jdbcType="VARCHAR" />
+        <result column="count" property="count" jdbcType="INTEGER" />
+        <result column="detail" property="detail" jdbcType="VARCHAR" />
+        <result column="imageUrl" property="imageUrl" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="DOUBLE" />
+    </resultMap>
+    <!-- 用户登录验证查询 -->
+    <select id="getAllPro" resultMap="BaseResultMap" parameterType="map">
+        select * from product
+    </select>
+</mapper>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="assets/plugins/flot/jquery.js"></script>
+<body>
+<span id="">
+    测试
+</span>
+<script type="text/javascript">
+    $(function(){
+
+        initProList();
+        function initProList(){
+            alert("2222");
+            $.ajax({
+                url:"rest/product/info",
+                type:'GET',
+                success:function (data) {
+                    alert(data);
+                }
+            })
+        }
+    })
+</script>
+</body>
+</html>
