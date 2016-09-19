@@ -1,0 +1,86 @@
+body,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div,dl,dt,dd,input{margin: 0;padding: 0;}
+body{font-size: 12px;}
+img{border: none;}
+li{list-style: none;}
+input,select,textarea{outline: none;}
+textarea{resize: none;}
+a{text-decoration: none;}
+/*清楚浮动*/
+.clearfix:after{content: "";display: block;clear: both;}
+.clearfix{zoom: 1;}
+
+body{background-color:#CCCCCC;}
+.topBar{width:1600px;height:100px;background-color:#1089E2;}
+.centent{width:1000px;height:660px;margin:0 auto; background-color:#7BC5EC;}
+.search{ width:1600px; height:40px; padding:5px 0; background-color:#FFFFFF;}
+.search1{ width:600px; height:40px; margin:0 500px;}
+.serachBox{ width:448px; height:38px; border:1px solid #CCCCCC;}
+.searchText{ width:150px; height:40px; background-color:#CCCCCC;}
+
+/*左侧列表*/
+.leftCent{width:200px;height:630px;float:left;background-color:#54AFF3;padding:15px 0;}
+.cent{width:150px;height:630px;margin:0 auto;}
+.shopKind{width:150px;height:68px;font-family:"楷体";padding-top:30px;border-bottom:2px solid #FFFFFF;}
+.kingCent{height:50px;text-align:center;color:#FFFFFF;}
+.shopName{height:480px;width:150px;padding-top:20px;font-family:"楷体";font-size:16px;text-align:center;}
+.nameStyle{height:25px;line-height:10px;margin:10px;}
+li a:hover{color:#FFFFFF;}
+
+/*右侧列表*/
+.rightCent{width:800px;height:660px;float:right;}
+.centCent{width:570px;height:500px;margin:110px 0 0 75px;background-color:#FFFFFF; border:1px solid #666666;}
+.centName{width:570px;height:69px;border-bottom:1px solid #CCCCCC;}
+.centList{width:570px;height:400px;}
+.centNum{width:570px;height:29px;border-top:1px solid #CCCCCC;}
+.item{ width:140px; height:200px; float:left;}
+.itemwidth{ width:120px; height:200px; margin:0 auto; padding:10px 0 0;}
+.itemImg{ width:120px; height:100px;}
+.itemInfo{ width:120px; height:80px;}
+
+
+
+/*结算页*/
+.centent1{ width:900px; height:640px; background-color:#FFFFFF; margin:0 auto; padding-top:10px; border:1px solid #666666;}
+
+/*订单信息*/
+.orderInfo{ width:900px; height:300px;}
+.orderName{ width:880px; height:14px; background-color:#CCCCCC; text-align:left; line-height:10px; padding:3px 10px;}
+.orderCent{ width:850px; height:260px; margin:10px 20px;}
+.centTop{ width:850px; height:20px; background-color:#CCCCCC;}
+.listOrder li{ display:inline;}
+.itemLogo{ width:200px; float:left; text-align:center; padding-top:5px;}
+.itemName{ width:200px; float:left; text-align:center; padding-top:5px;}
+.itemNum{ width:150px; float:left; text-align:center; padding-top:5px;}
+.itemPrice{ width:150px; float:left; text-align:center; padding-top:5px;}
+.itenAccount{ width:150px; float:left; text-align:center; padding-top:5px;}
+.centCenter{ width:850px; height:215px;}
+.centOne{ width:850px; height:104px; border-bottom:1px solid #CCCCCC;}
+.cenBottom{ width:100px; height:20px; float:right; text-align:left; margin:5px;}
+
+/*送货地址*/
+.address{ width:900px; height:100px; margin-top:20px;}
+.addName{ width:880px; height:14px; background-color:#CCCCCC; text-align:left; line-height:10px; padding:3px 10px;}
+.addCent{ width:880px; height:70px; padding:5px 10px;}
+
+/*支付方式*/
+.pay{width:900px; height:120px; margin-top:20px;}
+.payName{width:880px; height:14px; background-color:#CCCCCC; text-align:left; line-height:10px; padding:3px 10px;}
+.payCent{ width:880px; height:90px; padding:5px 10px;}
+
+/*底部处理*/
+.detail{ width:900px; height:70px; border-top:1px solid #CCCCCC;}
+.money{ width:100px; height:50px; float:right; margin-top:20px;}
+.subButton{ width:100px; height:50px; text-align:center; float:right; margin-top:20px;}
+
+/*产品页*/
+.introduce{ width:800px; height:500px; margin:80px 0 0 100px; background-color:#FFFFFF;}
+.productLeft{ width:298px; height:498px; border:1px solid #666666; float:left;}
+.productRight{ width:498px; height:498px; border:1px solid #666666; float:right;}
+.productImg{ width:200px; height:300px; margin:50px 0 0 45px;}
+.productInfo{ width:400px; height:400px; margin:50px 0 0 45px;}
+.productName{ width:400px; height:60px; margin:20px 0 0 50px;}
+
+/*购物车*/
+.introduce1{ width:800px; height:550px; margin:50px 0 0 100px; background-color:#FFFFFF;}
+
+/*注册页面 width:1000px;height:660px;margin:0 auto; background-color:#7BC5EC;*/

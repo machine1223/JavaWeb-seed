@@ -11,7 +11,7 @@
         <result column="price" property="price" jdbcType="DOUBLE" />
     </resultMap>
     <!-- 用户登录验证查询 -->
-    <select id="getAllPro" resultMap="BaseResultMap" parameterType="map">
-        select * from product
+    <select id="getAllPro" resultMap="BaseResultMap">
+        select * from product limit 0,8
     </select>
 </mapper>

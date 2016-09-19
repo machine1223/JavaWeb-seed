@@ -25,6 +25,10 @@ public class ProductController {
     @Resource
     private ProductService productService;
 
+    /**
+     * 获取商品详情页（暂时只取8个）
+     * @return
+     */
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ResponseBody
     public List<Product> getProductList() {

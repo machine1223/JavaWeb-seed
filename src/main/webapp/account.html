@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="styles/style1.css">
+<title>结算页</title>
+</head>
+
+<body>
+<div class="topBar">a</div>
+<div class="centent">
+  <div class="centent1">
+    <div class="orderInfo">
+	  <div class="orderName">送货清单</div>
+	  <div class="orderCent">
+	    <div class="centTop">
+		  <ul class="listOrder">
+		    <li class="itemLogo">商品图标</li>
+			<li class="itemName">商品名称</li>
+			<li class="itemNum">商品数量</li>
+			<li class="itemPrice">商品单价</li>
+			<li class="itenAccount">商品总价</li>
+		  </ul>
+		</div>
+	    <div class="centCenter">
+		 <div class="centOne">
+		    <ul class="listOrder">
+		    <li class="itemLogo"></li>
+			<li class="itemName"></li>
+			<li class="itemNum"></li>
+			<li class="itemPrice"></li>
+			<li class="itenAccount"></li>
+		  </ul>
+		 </div>
+		 <div class="centOne">
+		  <ul class="listOrder">
+		    <li class="itemLogo"></li>
+			<li class="itemName"></li>
+			<li class="itemNum"></li>
+			<li class="itemPrice"></li>
+			<li class="itenAccount"></li>
+		  </ul>
+		 </div>
+		</div>
+		<div class="cenBottom">
+		  <input type="button" name="pageTurn" value="下一页" />
+		</div>
+	  </div>
+	</div>
+    <div class="address">
+	  <div class="addName">收货信息</div>
+	  <div class="addCent">
+	    <form class="#">
+		  <p>
+		    选择地区：
+		    <select name="add1">
+              <option value="village">校内</option>
+              <option value="city">学生生活城</option>
+            </select>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		    楼&nbsp;&nbsp;号：
+		    <select name="building">
+		      <option value="A">A座</option>
+		      <option value="B">B座</option>
+		      <option value="C">C座</option>
+		      <option value="D">D座</option>
+		      <option value="E">E座</option>
+		    </select>
+		 </p>
+		 <p>
+		   寝室号&nbsp;： <input type="text" name="houseNum" />
+		   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		   手机号&nbsp;：<input type="text" name="phone"/>
+		 </p>
+		</form>
+	  </div>
+	 </div>
+	<div class="pay">
+	  <div class="payName">支付方式</div>
+	  <div class="payCent">
+	    <form>
+		  <p><input type="radio" name="payWay" value="微信支付" />微信支付</p>
+		  <p> <input type="radio" name="payWay" value="支付宝支付" />支付宝支付</p>
+		  <p><input type="radio" name="payWay" value="货到付款" />货到付款</p>
+		</form>
+	  </div>
+	</div>
+	<div class="detail">
+	  <div class="money"></div>
+	  <div class="subButton"><input type="submit" name="payMoney" value="付款" /></div>
+	</div>
+  </div>	  
+</div>
+</body>
+</html>
