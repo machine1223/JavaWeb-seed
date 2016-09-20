@@ -15,4 +15,6 @@ import java.util.List;
 public interface ProductMapper extends GenericDao<Product, Long> {
 
     List<Product> getAllPro(@Param("proType") int proType);
+
+    Product getProDetailById(@Param("id") long id);
 }

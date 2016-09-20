@@ -23,4 +23,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProducts(int proType) {
         return productMapper.getAllPro(proType);
     }
+
+    @Override
+    public Product getProductDetail(long id) {
+        return productMapper.getProDetailById(id);
+    }
 }

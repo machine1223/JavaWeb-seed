@@ -3,6 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="styles/page.css">
+	<!--Jquery start-->
+	<script src="assets/plugins/flot/jquery.js"></script>
+	<!--Jquery end-->
 	<title>产品详情</title>
 </head>
 
@@ -11,14 +14,14 @@
 <div class="centent">
 	<div class="introduce">
 		<div class="productLeft">
-			<div class="productImg"></div>
+			<div class="productImg"><img src="" id="pro_image"></div>
 		</div>
 		<div class="productRight">
 			<div class="productInfo">
-				<div class="productName"></div>
+				<div class="productName" id="proName"></div>
 				<div class="productState"></div>
-				<div class="productPrice"></div>
-				<div class="productNum">
+				<div class="productPrice" id="proPrice"></div>
+				<div class="productNum" id="proCount">
 					数量：
 
 				</div>
@@ -30,5 +33,33 @@
 		</div>
 	</div>
 </div>
+<script>
+	function getParameterByName(name) {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+				results = regex.exec(location.search);
+		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+
+	var id = getParameterByName("id");
+	getProductDetail(id);
+	function getProductDetail(value) {
+		$.ajax({
+			url: "rest/product/detail?id=" + value,
+			type: 'GET',
+			success: function (data) {
+				displayProDetail(data);
+			}
+		})
+	}
+
+	function displayProDetail(data){
+		$('#pro_image').attr("src", data.imageUrl);
+		$('#proCount').html(data.count);
+		$('#proName').html(data.name);
+		$('#proPrice').html(data.price);
+	}
+
+</script>
 </body>
 </html>

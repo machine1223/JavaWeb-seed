@@ -12,4 +12,6 @@ import java.util.List;
 public interface ProductService {
 
     List<Product> getProducts(int type);
+
+    Product getProductDetail(long id);
 }

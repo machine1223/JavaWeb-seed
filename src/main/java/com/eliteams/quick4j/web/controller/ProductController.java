@@ -31,4 +31,14 @@ public class ProductController {
     public List<Product> getProductList(@RequestParam("proType") int proType) {
         return productService.getProducts(proType);
     }
+
+    /**
+     * 获取商品详情页（暂时只取10个）
+     * @return
+     */
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    @ResponseBody
+    public Product getProductDetail(@RequestParam("id") long id) {
+        return productService.getProductDetail(id);
+    }
 }

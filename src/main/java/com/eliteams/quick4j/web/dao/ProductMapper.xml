@@ -11,8 +11,12 @@
         <result column="price" property="price" jdbcType="DOUBLE" />
         <result column="proType" property="proType" jdbcType="INTEGER" />
     </resultMap>
-    <!-- 用户登录验证查询 -->
+    <!-- 获取某类商品列表信息 -->
     <select id="getAllPro" resultMap="BaseResultMap" parameterType="Integer">
         select * from product where proType = #{proType} limit 0,10
+    </select>
+    <!-- 获取单个商品详情 -->
+    <select id="getProDetailById" resultMap="BaseResultMap" parameterType="Long">
+        select * from product where id = #{id}
     </select>
 </mapper>

@@ -26,15 +26,15 @@
                 <ol>
                     <li class="nameStyle"><a href="javascript:void(0);" onclick="goToVeget()">蔬菜</a></li>
                     <li class="nameStyle"><a href="javascript:void(0);" onclick="goToFruit()">水果</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);">干果</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);">饮料</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);">饼干</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);">面包</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);">糖果</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);">肉类</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);">蜜饯</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);">薯片膨化</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);">果冻布丁</a></li>
+                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToDry()">干果</a></li>
+                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToDrink()">饮料</a></li>
+                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToCookie()">饼干</a></li>
+                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToBread()">面包</a></li>
+                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToSweet()">糖果</a></li>
+                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToMeat()">肉类</a></li>
+                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToSweetmeat()">蜜饯</a></li>
+                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToChips()">薯片膨化</a></li>
+                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToJelly()">果冻布丁</a></li>
                 </ol>
             </div>
         </div>
@@ -46,14 +46,59 @@
     $('#super_content').load("fruit.html");//默认主页页面跳转及数据加载
     initProList(1);
 
-    function goToFruit() {//水果页面跳转
-        $('#super_content').load("fruit.html");
+    function goToVeget() {//蔬菜页面跳转
+        $('#super_content').load("vegetable.html");
         initProList(1);
     }
 
-    function goToVeget() {//蔬菜页面跳转
-        $('#super_content').load("vegetable.html");
+    function goToFruit() {//水果页面跳转
+        $('#super_content').load("fruit.html");
         initProList(2);
+    }
+
+    function goToDry() {//干果页面跳转
+        $('#super_content').load("dry.html");
+        initProList(3);
+    }
+
+    function goToDrink() {//饮料页面跳转
+        $('#super_content').load("drink.html");
+        initProList(4);
+    }
+
+    function goToCookie() {//饼干页面跳转
+        $('#super_content').load("cookie.html");
+        initProList(5);
+    }
+
+    function goToBread() {//面包页面跳转
+        $('#super_content').load("bread.html");
+        initProList(6);
+    }
+
+    function goToSweet() {//糖果页面跳转
+        $('#super_content').load("sweet.html");
+        initProList(7);
+    }
+
+    function goToMeat() {//肉类页面跳转
+        $('#super_content').load("meat.html");
+        initProList(8);
+    }
+
+    function goToSweetmeat() {//蜜饯页面跳转
+        $('#super_content').load("sweetmeat.html");
+        initProList(9);
+    }
+
+    function goToChips() {//薯片膨化页面跳转
+        $('#super_content').load("chips.html");
+        initProList(10);
+    }
+
+    function goToJelly() {//果冻布丁页面跳转
+        $('#super_content').load("jelly.html");
+        initProList(11);
     }
 
     function initProList(value) {
@@ -69,9 +114,17 @@
     //页面html拼接
     function displayProData(data) {
         for (var i = 0; i < data.length; i++) {
+//            alert(data[i].id);
+            var id = data[i].id;
             $('#imag_' + (i + 1)).attr('src', data[i].imageUrl);
-            $('#info_' + (i + 1)).html('</br><a href="product.html">' + data[i].name + '</a></br></br><b>' + data[i].price + '</b>' + '元/500g');
+            $('#info_' + (i + 1)).html('</br><a href="javascript:void(0)"  onclick="openDetail('+ id +')">' + data[i].name + '</a></br></br><b>' + data[i].price + '</b>' + '元/500g');
+//            $('#info_' + (i + 1)).html('</br><a href="product.html?id='+data[i].id+'"  onclick="openDetail(data[i].id)"   >' + data[i].name + '</a></br></br><b>' + data[i].price + '</b>' + '元/500g');
         }
+    }
+
+    function openDetail(data){
+//        alert(data);
+        location.href = "product.html?id=" + data;
     }
 </script>
 </body>
