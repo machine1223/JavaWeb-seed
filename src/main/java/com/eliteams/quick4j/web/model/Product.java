@@ -14,6 +14,7 @@ public class Product {
     private String detail;
     private String imageUrl;
     private double price;
+    private int proType;
 
     public long getId() {
         return id;
@@ -69,5 +70,13 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getProType() {
+        return proType;
+    }
+
+    public void setProType(int proType) {
+        this.proType = proType;
     }
 }

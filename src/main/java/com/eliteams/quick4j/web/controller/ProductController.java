@@ -3,10 +3,7 @@ package com.eliteams.quick4j.web.controller;
 import com.eliteams.quick4j.web.model.Product;
 import com.eliteams.quick4j.web.model.User;
 import com.eliteams.quick4j.web.service.ProductService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -26,12 +23,12 @@ public class ProductController {
     private ProductService productService;
 
     /**
-     * 获取商品详情页（暂时只取8个）
+     * 获取商品详情页（暂时只取10个）
      * @return
      */
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ResponseBody
-    public List<Product> getProductList() {
-        return productService.getProducts();
+    public List<Product> getProductList(@RequestParam("proType") int proType) {
+        return productService.getProducts(proType);
     }
 }

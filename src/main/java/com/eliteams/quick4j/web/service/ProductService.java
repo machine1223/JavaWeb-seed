@@ -11,5 +11,5 @@ import java.util.List;
  */
 public interface ProductService {
 
-    List<Product> getProducts();
+    List<Product> getProducts(int type);
 }

@@ -9,9 +9,10 @@
         <result column="detail" property="detail" jdbcType="VARCHAR" />
         <result column="imageUrl" property="imageUrl" jdbcType="VARCHAR" />
         <result column="price" property="price" jdbcType="DOUBLE" />
+        <result column="proType" property="proType" jdbcType="INTEGER" />
     </resultMap>
     <!-- 用户登录验证查询 -->
-    <select id="getAllPro" resultMap="BaseResultMap">
-        select * from product limit 0,8
+    <select id="getAllPro" resultMap="BaseResultMap" parameterType="Integer">
+        select * from product where proType = #{proType} limit 0,10
     </select>
 </mapper>

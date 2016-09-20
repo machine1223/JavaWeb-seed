@@ -3,6 +3,7 @@ package com.eliteams.quick4j.web.dao;
 import com.eliteams.quick4j.core.generic.GenericDao;
 import com.eliteams.quick4j.web.model.Invite;
 import com.eliteams.quick4j.web.model.Product;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * Date:2016/9/19
  * Time:18:05
  */
-public interface ProductMapper extends GenericDao<Invite, Long> {
+public interface ProductMapper extends GenericDao<Product, Long> {
 
-    List<Product> getAllPro();
+    List<Product> getAllPro(@Param("proType") int proType);
 }
