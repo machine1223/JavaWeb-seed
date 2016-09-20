@@ -10,16 +10,17 @@ a{text-decoration: none;}
 .clearfix{zoom: 1;}
 
 body{background-color:#CCCCCC;}
-.topBar{width:1600px;height:100px;background-color:#1089E2;}
-.centent{width:1000px;height:660px;margin:0 auto; background-color:#7BC5EC;}
-.search{ width:1600px; height:40px; padding:5px 0; background-color:#FFFFFF;}
-.search1{ width:600px; height:40px; margin:0 500px;}
-.serachBox{ width:448px; height:38px; border:1px solid #CCCCCC;}
+/*修改宽度为100%*/
+.topBar{width:100%;height:50px;background-color:#1089E2;align-content: center;}
+.centent{width:100%;height:660px;margin:0 auto; background-color:#7BC5EC;}
+.search{ width:100%; height:40px; padding:5px 0; background-color:#FFFFFF;}
+.search1{ width:60%; height:40px; margin:0 500px;}
+.serachBox{ width:50%; height:38px; border:1px solid #CCCCCC;}
 .searchText{ width:150px; height:40px; background-color:#CCCCCC;}
 
 /*左侧列表*/
-.leftCent{width:200px;height:630px;float:left;background-color:#54AFF3;padding:15px 0;}
-.cent{width:150px;height:630px;margin:0 auto;}
+.leftCent{width:20%;height:630px;float:left;background-color:#54AFF3;padding:15px 0;}
+.cent{width:150px;margin:0 auto;}
 .shopKind{width:150px;height:68px;font-family:"楷体";padding-top:30px;border-bottom:2px solid #FFFFFF;}
 .kingCent{height:50px;text-align:center;color:#FFFFFF;}
 .shopName{height:480px;width:150px;padding-top:20px;font-family:"楷体";font-size:16px;text-align:center;}
@@ -27,14 +28,15 @@ body{background-color:#CCCCCC;}
 li a:hover{color:#FFFFFF;}
 
 /*右侧列表*/
-.rightCent{width:800px;height:660px;float:right;}
-.centCent{width:570px;height:500px;margin:110px 0 0 75px;background-color:#FFFFFF; border:1px solid #666666;}
-.centName{width:570px;height:69px;border-bottom:1px solid #CCCCCC;}
-.centList{width:570px;height:400px;}
-.centNum{width:570px;height:29px;border-top:1px solid #CCCCCC;}
-.item{ width:140px; height:200px; float:left;}
-.itemwidth{ width:120px; height:200px; margin:0 auto; padding:10px 0 0;}
-.itemImg{ width:120px; height:100px;}
+/*不设置高度%*/
+.rightCent{width:80%;height:auto;float:right;}
+.centCent{width:95%;height:auto;margin:20px 0 0 25px;background-color:#FFFFFF; border:1px solid #666666;}
+.centName{width:100%;height:69px;border-bottom:1px solid #CCCCCC;}
+.centList{width:100%;height:400px;}
+.centNum{width:100%;height:29px;border-top:1px solid #CCCCCC;}
+.item{ width:19%; height:200px; float:left;}
+.itemwidth{ width:100%; height:250px;padding:10px 5px 5px 10px;}
+.itemImg{ width:100%; height:120px;}
 .itemInfo{ width:120px; height:80px;}
 
 
