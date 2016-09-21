@@ -17,6 +17,11 @@ public class JSONResult<T> extends Result {
      */
     private T data;
 
+    /**
+     * @author by wangxing 设置返回结果
+     */
+    private int code;
+
 
     public T getData() {
         return data;
@@ -55,6 +60,12 @@ public class JSONResult<T> extends Result {
         super.setSuccess(true);
     }
 
+    public JSONResult(int code, T data) {
+        this.code = code;
+        this.data = data;
+        super.setSuccess(true);
+    }
+
     /**
      * 成功返回数据
      *
@@ -63,5 +74,13 @@ public class JSONResult<T> extends Result {
     public JSONResult(T data) {
         this.data = data;
         super.setSuccess(true);
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }

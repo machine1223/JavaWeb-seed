@@ -1,6 +1,7 @@
 package com.eliteams.quick4j.web.service;
 
 import com.eliteams.quick4j.core.generic.GenericService;
+import com.eliteams.quick4j.web.model.ShopUser;
 import com.eliteams.quick4j.web.model.User;
 
 /**
@@ -26,4 +27,5 @@ public interface UserService extends GenericService<User, Long> {
      * @return
      */
     User selectByUsername(String username);
+
 }

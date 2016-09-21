@@ -3,6 +3,7 @@ package com.eliteams.quick4j.web.service.impl;
 import java.util.List;
 import javax.annotation.Resource;
 
+import com.eliteams.quick4j.web.model.ShopUser;
 import org.springframework.stereotype.Service;
 import com.eliteams.quick4j.core.generic.GenericDao;
 import com.eliteams.quick4j.core.generic.GenericServiceImpl;
