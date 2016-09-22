@@ -1,10 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="styles/page.css">
-<title>无标题文档</title>
-<style>
+    <script src="assets/plugins/flot/jquery.js"></script>
+    <title>无标题文档</title>
+<style type="text/css">
 html body {background-image:url(images/register.jpg); background-repeat:no-repeat;background-size:cover;-moz-background-size:cover;-webkit-background-size:cover;opacity:0.9;}
 .wrapper {margin: 100px auto;width: 884px;}
 .loginBox {background-color: #FEFEFE;border: 1px solid #BfD6E1;border-radius: 5px;color: #444;font: 14px 'Microsoft YaHei','微软雅黑'; margin: 0 auto; width: 388px}
@@ -23,25 +24,55 @@ html body {background-image:url(images/register.jpg); background-repeat:no-repea
 .loginBox label[for="remember"] { font: 11px Arial;}
 </style>
 </head>
-
 <body>
-<div class="topBar">a</div>
+<div class="topBar">网上超市</div>
  <div class="wrapper">
-    <form action="/chaos/EvilEmail.html" method="post" >
+    <form id="login_from">
     <div class="loginBox">
         <div class="loginBoxCenter">
-            <p><label for="username">账 号：</label></p>
-            <p><input type="email" id="email" name="email" class="loginInput" autofocus="autofocus" required="required" autocomplete="off" placeholder="请输入电子邮箱" value="" /></p>
-            <p><label for="password">密 码：</label><a class="forgetLink" href="#">忘记密码?</a></p>
+            <p><label for="userName">账 号：</label></p>
+            <p><input type="text" id="userName" name="userName" class="loginInput" autofocus="autofocus" required="required" autocomplete="off" placeholder="请输入用户名" value="" /></p>
+            <p><label for="password">密 码：</label>
+                <a class="forgetLink" href="register.html">没有账号，去注册?</a></p>
             <p><input type="password" id="password" name="password" class="loginInput" required="required" placeholder="请输入密码" value="" /></p>
         </div>
         <div class="loginBoxButtons">
             <input id="remember" type="checkbox" name="remember" />
             <label for="remember">记住登录状态</label>
-            <button class="loginBtn">登录</button>
+            <input type="button" class="loginBtn" id="login_btn" value="登 录" />
         </div>
     </div>
     </form>
  </div>
 </body>
+<script>
+
+    $('#login_btn').click(function(){
+        $.ajax({
+            async:false,
+            type: "POST",
+            url: "rest/shopuser/login",
+            data: JSON.stringify({
+                "userName": $('#userName').val(),
+                "password": $('#password').val()
+            }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.code == 0) {
+                    location.href = "/quick4j/index.html";
+                }else if(data.code == -2){
+                    alert("登录失败!原因是：" + data.message);
+                }else if(data.code == -3){
+                    alert("登录失败!原因是：" + data.message);
+                    location.href = "/quick4j/register.html";
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+//                alert(errorThrown);
+                alert("发生错误");
+            }
+        })
+    });
+</script>
 </html>

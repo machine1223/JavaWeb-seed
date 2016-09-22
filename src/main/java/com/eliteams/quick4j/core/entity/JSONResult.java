@@ -67,6 +67,17 @@ public class JSONResult<T> extends Result {
     }
 
     /**
+     * 返回给操作成功
+     * @param code 操作返回码
+     * @param message 返回信息
+     */
+    public JSONResult(int code, String message) {
+        this.code = code;
+        super.setMessage(message);
+        super.setSuccess(true);
+    }
+
+    /**
      * 成功返回数据
      *
      * @param data

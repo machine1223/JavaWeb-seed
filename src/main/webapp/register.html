@@ -1,83 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-<title>注册</title>
-<meta name="Generator" content="EditPlus"> 
-<meta name="Author" content=""> 
-<meta name="Keywords" content=""> 
-<meta name="Description" content=""> 
-<meta charset="utf-8"> 
-<style type="text/css"> 
-html {background-color: #E9EEF0;}
-div{ width:35%;margin:100px auto; background-color: #F0F4F6;} 
-</style>
-  <script src="assets/plugins/flot/jquery.js"></script>
-</head> 
-<body > 
-<div> 
-<form class="f1">
-<fieldset > 
-<legend>用户注册</legend> 
-<table width=100% >
-  <tbody>
-    <tr >
-      <td class=“left” width=40% align="right"><label for="studentNo">学 号：</label></td>
-      <td class="right"><input type="text" id="studentNo" name="studentNo"></td>
-    </tr>
-	<tr >
-      <td class=“left” width=40% align="right"><label for="userName">姓 名：</label></td>
-      <td class="right"><input type="text" id="userName" name="userName"></td>
-    </tr>
-    <tr>
-      <td class=“left” width=40% align="right"><label for="password">密 码：</label></td>
-      <td class="right"><input id="password" type="password" name="password" /></td>
-    </tr>
-    <tr>
-      <td class=“left” width=40% align="right"><label for="phoneNo">手 机：</label></td>
-      <td class="right"><input type="text" id="phoneNo" name="phoneNo" ></td>
-    </tr>
-    <tr>
-      <td class=“left” width=40% align="right"><label for="sex2">性 别：</label></td>
-      <td class="right"><input type="radio" id="sex1" name="sex" value="0" /> 男<!-- name设置成一样的就行了-->
-                        <input type="radio" id="sex2" name="sex" value="1" /> 女 </td>
-    </tr>
-    <tr>
-      <td colspan="2" align="center"><input type="button" id="save_btn" value="提 交" onclick="submitInfo()" />
-      </td>
-    </tr>
-  </tbody>
-</table>
-</fieldset> 
-</form> 
+<head>
+    <title>注册</title>
+    <meta name="Generator" content="EditPlus">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <meta charset="utf-8">
+    <style type="text/css">
+        html {
+            background-color: #E9EEF0;
+        }
+
+        div {
+            width: 35%;
+            margin: 100px auto;
+            background-color: #F0F4F6;
+        }
+    </style>
+    <script src="assets/plugins/flot/jquery.js"></script>
+</head>
+<body>
+<div>
+    <form class="f1">
+        <fieldset>
+            <legend>用户注册</legend>
+            <table width=100%>
+                <tbody>
+                <tr>
+                    <td class=“left” width=40% align="right"><label for="studentNo">学 号：</label></td>
+                    <td class="right"><input type="text" id="studentNo" name="studentNo"></td>
+                </tr>
+                <tr>
+                    <td class=“left” width=40% align="right"><label for="userName">姓 名：</label></td>
+                    <td class="right"><input type="text" id="userName" name="userName"></td>
+                </tr>
+                <tr>
+                    <td class=“left” width=40% align="right"><label for="password">密 码：</label></td>
+                    <td class="right"><input id="password" type="password" name="password"/></td>
+                </tr>
+                <tr>
+                    <td class=“left” width=40% align="right"><label for="phoneNo">手 机：</label></td>
+                    <td class="right"><input type="text" id="phoneNo" name="phoneNo"></td>
+                </tr>
+                <tr>
+                    <td class=“left” width=40% align="right"><label for="sex2">性 别：</label></td>
+                    <td class="right"><input type="radio" id="sex1" name="sex" value="0"/> 男<!-- name设置成一样的就行了-->
+                        <input type="radio" id="sex2" name="sex" value="1"/> 女
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input type="button" id="save_btn" value="提 交" onclick="submitInfo()"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </form>
 </div>
 <script type="text/javascript">
-function submitInfo() {
-  $.ajax({
-    type: "POST",
-    url: "rest/shopuser/register",
-    data: JSON.stringify({
-      "studentNo": $('#studentNo').val(),
-      "userName": $('#userName').val(),
-      "password": $('#password').val(),
-      "phoneNo": $('#phoneNo').val(),
-      "sex": $("input[name='sex']:checked").val(),
-    }),
-    dataType: "json",
-    contentType: "application/json; charset=utf-8",
-    success: function (data) {
-      console.log(JSON.stringify(data));
-      if (data.code == 0) {
-        alert("注册成功!");
-        location.href = "/index.html";
-      } else {
-        alert("注册失败!原因是：" + data.message);
-      }
-    },
-    error: function (XMLHttpRequest, textStatus, errorThrown) {
-      alert(errorThrown);
+
+    function submitInfo() {
+        $('#save_btn').attr("disabled", true);
+        $.ajax({
+            async:false,
+            type: "POST",
+            url: "rest/shopuser/register",
+            data: JSON.stringify({
+                "studentNo": $('#studentNo').val(),
+                "userName": $('#userName').val(),
+                "password": $('#password').val(),
+                "phoneNo": $('#phoneNo').val(),
+                "sex": $("input[name='sex']:checked").val()
+            }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log(JSON.stringify(data));
+                if (data.code == 0) {
+                    alert("注册成功!");
+                    location.href = "/quick4j/login.html";
+                } else {
+                    alert("注册失败!原因是：" + data.message);
+                }
+                $('#save_btn').attr("disabled", false);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        })
     }
-  })
-}
 </script>
-</body> 
+</body>
 </html> 

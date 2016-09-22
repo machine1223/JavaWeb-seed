@@ -21,7 +21,22 @@ public class ShopUserServiceImpl implements ShopUserService {
     private ShopUserMapper shopUserMapper;
 
     @Override
-    public int saveShopUser(ShopUser user) {
+    public Integer saveShopUser(ShopUser user) {
         return shopUserMapper.saveShopUser(user);
+    }
+
+    @Override
+    public Integer validateUser(ShopUser user) {
+        return shopUserMapper.validateUser(user);
+    }
+
+    @Override
+    public Integer loginValidate(ShopUser user) {
+        return shopUserMapper.loginValidate(user);
+    }
+
+    @Override
+    public ShopUser loginSystem(ShopUser user) {
+        return shopUserMapper.loginSystem(user);
     }
 }

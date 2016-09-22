@@ -15,4 +15,16 @@
         values (#{studentNo,jdbcType=VARCHAR}, #{phoneNo,jdbcType=VARCHAR},
         #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR})
     </insert>
+    <select id="validateUser" resultType="Integer" parameterType="com.eliteams.quick4j.web.model.ShopUser">
+        select * from ShopUser
+        where userName = #{userName, jdbcType=VARCHAR} or studentNo = #{studentNo, jdbcType=VARCHAR}
+    </select>
+    <select id="loginValidate" resultType="Integer" parameterType="com.eliteams.quick4j.web.model.ShopUser">
+        select * from ShopUser
+        where userName = #{userName, jdbcType=VARCHAR}
+    </select>
+    <select id="loginSystem" resultMap="BaseResultMap" parameterType="com.eliteams.quick4j.web.model.ShopUser">
+        select * from ShopUser
+        where userName = #{userName, jdbcType=VARCHAR} and password = #{password, jdbcType=VARCHAR}
+    </select>
 </mapper>

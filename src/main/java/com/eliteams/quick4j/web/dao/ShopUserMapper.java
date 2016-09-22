@@ -10,5 +10,11 @@ import com.eliteams.quick4j.web.model.ShopUser;
  */
 public interface ShopUserMapper extends GenericDao<ShopUser, Long> {
 
-    int saveShopUser(ShopUser user);
+    Integer saveShopUser(ShopUser user);
+
+    Integer validateUser(ShopUser user);
+
+    Integer loginValidate(ShopUser user);
+
+    ShopUser loginSystem(ShopUser user);
 }
