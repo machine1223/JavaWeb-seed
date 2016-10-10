@@ -2,15 +2,223 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="styles/page.css">
-<title>购物车</title>
+    <link rel="stylesheet" type="text/css" href="styles/page.css">
+    <script src="js/jquery.min.js"></script>
+    <link type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/dataTables.bootstrap.css" rel="stylesheet" />
+    <script src="js/bootstrap.min.js"></script>
+    <!-- DataTables Needed Scripts -->
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <!--<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>-->
+    <title>购物车</title>
 </head>
 
 <body>
-  <div class="topBar">a</div>
+  <div class="topBar">
+      <div class="topCent">
+          <div class="huanYing">欢迎光临</div>
+          <div class="logo"><a href="index.html">吃货小铺</a></div>
+          <div class="topCart"><a href="cart.html">购物车</a></div>
+          <div class="topOrder"><a href="order.html">订单详情</a></div>
+          <div class="topRegister"><a href="register.html">注册</a></div>
+          <div class="topLogin"><a href="login.html">登陆</a></div>
+      </div>
+  </div>
   <div class="centent">
     <div class="introduce1">
+        <span style="text-align: center;font-size: large;">购物车</span>
+        <table id="example" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th><input type="checkbox" class="active" checked="checked" id="check_all"/></th>
+                <th>名称</th>
+                <th>单价</th>
+                <th>数量</th>
+                <th style="width: 10%;">总价</th>
+                <th>添加时间</th>
+            </tr>
+            </thead>
+        </table>
+        <div>
+            <div class="col-md-2"><button class="btn-danger" onclick="clearCart()">清空购物车</button></div>
+            <div class="col-md-2"><span id="total">合计： 元</span></div>
+            <div class="col-md-2"><button class="btn-success" onclick="buyAccount()">去结算</button></div>
+        </div>
 	</div>
   </div>
 </body>
+<script>
+
+    var aaData;
+    var total = 0;
+    var oriTotal = 0;
+    var selectArra = [];
+    var oTable;
+
+    getCartSlice();
+
+        function getCartSlice(){
+           oTable =  $('#example').dataTable({
+                sDom: "Tft<'row DTTTFooter'<'col-sm-6'i><'col-sm-6'p>>",
+                bInfo: true,
+                bFilter: false,
+                iDisplayLength: 100,
+                bPaginate: true,
+                bServerSide: false,
+                sAjaxSource: "rest/cart/all?userId=" + 6,
+                fnServerData: getDataFromServerSideForDataTable,
+                aoColumns: [
+                    {
+                        mData: "id",
+                        mRender: getCheckbox,
+                        sClass: "text-center"
+                    },
+                    {
+                        mData: "name",
+                        mRender: formatData,
+                        sClass: "text-center"
+                    },{
+                        mData: "price",
+                        mRender: formatData,
+                        sClass: "text-center"
+                    },{
+                        mData: "buyCount",
+                        mRender: formatData,
+                        sClass: "text-center"
+                    }, {
+                        mData: "total",
+                        mRender: formatData,
+                        sClass: "text-center"
+                    },
+                    {
+                        mData: "time",
+                        mRender: formatData,
+                        sClass: "text-center"
+                    }
+                ]
+            });
+        }
+
+        function getDataFromServerSideForDataTable(sSource, aoData, fnCallback){
+            //alert(JSON.stringify(aoData));
+            var jsonData = makeParametersForDataTable(aoData);
+            //alert(JSON.stringify(jsonData));
+            $.ajax({
+                url: sSource,
+                type: "get",
+                data: jsonData,
+                success: function(data){
+                    if(data.code == 0){
+                        aaData = data.data.aaData;
+                        viewTotalPrice(aaData);
+                        fnCallback(data.data);
+                    }else{
+                        loginExpiry(data.code,data.description);
+                    }
+                }
+            });
+        }
+
+        //计算购物车总价
+        function viewTotalPrice(data){
+            for(var i = 0; i < data.length;i ++){
+                   total += data[i].total;
+            }
+            oriTotal = total;
+            $('#total').html("合计：" + total.toFixed(2) + "元");
+        }
+
+        function changeStatus(data, value){
+            if ($('#' + data).prop("checked")) {
+                total += value;
+                $('#total').html("合计：" + total.toFixed(2) + "元");
+            }else{
+                total -= value;
+                $('#total').html("合计：" + total.toFixed(2) + "元");
+            }
+        }
+
+        //全选，取消判定
+        $("#check_all").click(function () {
+            if (this.checked) {
+                $("input[name='checkbox']:checkbox").each(function () {
+                    $(this).prop("checked", true);
+                });
+                total = oriTotal;
+                $('#total').html("合计：" + oriTotal.toFixed(2) + "元");
+            }else{
+                $("input[name='checkbox']:checkbox").each(function () {
+                    $(this).prop("checked", false);
+                });
+                total = 0;
+                $('#total').html("合计：" + 0.00.toFixed(2) + "元");
+            }
+        });
+
+
+
+        function getCheckbox(data,type,row){
+            return '<input type="checkbox" name="checkbox" id="'+data+'" checked="checked" onclick="changeStatus('+ data + ',' + row.total +')" />'
+        }
+
+        function buyAccount(){
+            for(var j = 0; j < aaData.length; j ++){
+                if($('#' + aaData[j].id).prop("checked")) {//如果购物车中选中则去结算
+                    selectArra.push(aaData[j].id);
+                }
+            }
+            goToAccount(selectArra);
+            location.href = "/shop/account.html";
+        }
+
+    function goToAccount(data){
+        $.ajax({
+            type: "POST",
+            url: "rest/account/sub",
+            data: JSON.stringify({
+                "selectArray": data,//购物车结算 购物车id
+                "userId": 6,//吕文芳id
+            }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log(JSON.stringify(data));
+                if (data.code == 0) {
+                //去结算页
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        })
+    }
+
+    function formatData(data) {
+        if(data){
+            return data;
+        }else{
+            return "";
+        }
+    }
+
+    function clearCart(){
+            $.ajax({
+                url: "rest/cart/clear?userId=" + 6,
+                type: 'DELETE',
+                success: function (data) {
+                    if (data.code == 0) {
+                        oTable.fnClearTable();
+                        alert("购物车已经清空");
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            })
+    }
+
+</script>
 </html>

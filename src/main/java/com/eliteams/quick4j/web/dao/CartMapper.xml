@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eliteams.quick4j.web.dao.CartMapper">
+    <resultMap id="BaseResultMap" type="com.eliteams.quick4j.web.model.Cart">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="buyCount" property="buyCount" jdbcType="INTEGER" />
+        <result column="total" property="total" jdbcType="DOUBLE" />
+        <result column="price" property="price" jdbcType="DOUBLE" />
+        <result column="userId" property="userId" jdbcType="BIGINT" />
+        <result column="proId" property="proId" jdbcType="BIGINT" />
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <!-- 新增购物车-->
+    <insert id="saveCartInfo" parameterType="com.eliteams.quick4j.web.model.Cart" useGeneratedKeys="true" keyProperty="id">
+        insert into Cart (name, buyCount,
+        total, price, proId, userId, createTime)
+        values (#{name,jdbcType=VARCHAR}, #{buyCount,jdbcType=INTEGER},
+        #{total,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE}, #{proId,jdbcType=BIGINT},
+        #{userId, jdbcType=BIGINT}, #{createTime, jdbcType=TIMESTAMP})
+    </insert>
+
+    <!-- 购物车信息-->
+    <select id="getCartSliceByUserId" resultMap="BaseResultMap" parameterType="Long">
+        select * from Cart where userId = #{userId}
+    </select>
+
+    <!-- 购物车信息-->
+    <select id="getDetailById" resultMap="BaseResultMap" parameterType="Long">
+        select * from Cart where id = #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="Long">
+        delete from Cart where id = #{id}
+    </delete>
+
+    <delete id="deleteByUserId" parameterType="Long">
+        delete from Cart where userId = #{userId}
+    </delete>
+</mapper>

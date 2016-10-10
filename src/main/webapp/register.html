@@ -1,63 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="styles/page.css">
+    <script src="assets/plugins/flot/jquery.js"></script>
     <title>注册</title>
-    <meta name="Generator" content="EditPlus">
-    <meta name="Author" content="">
-    <meta name="Keywords" content="">
-    <meta name="Description" content="">
-    <meta charset="utf-8">
     <style type="text/css">
-        html {
-            background-color: #E9EEF0;
-        }
-
-        div {
-            width: 35%;
-            margin: 100px auto;
-            background-color: #F0F4F6;
-        }
+        html body {background-image:url(images/register.jpg); background-repeat:no-repeat;background-size:cover;-moz-background-size:cover;-webkit-background-size:cover;opacity:0.9;}
+        .wrapper {margin: 100px auto;width: 884px;}
+        .loginBox {background-color: #FEFEFE;border: 1px solid #BfD6E1;border-radius: 5px;color: #444;font: 14px 'Microsoft YaHei','微软雅黑'; margin: 0 auto; width: 388px}
+        .loginBox .loginBoxCenter { border-bottom: 1px solid #DDE0E8; padding: 24px;}
+        .loginBox .loginBoxCenter p { margin-bottom: 10px}
+        .loginBox .loginBoxButtons{ background-color: #F0F4F6;border-top: 1px solid #FFF;border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;line-height: 28px;
+            overflow: hidden; padding: 20px 24px; vertical-align: center;}
+        .loginBox .loginInput {border: 1px solid #D2D9dC;border-radius: 2px;color: #444; font: 12px 'Microsoft YaHei','微软雅黑'; padding: 8px 14px; margin-bottom: 8px;
+            width: 310px;}
+        .loginBox .loginInput:FOCUS { border: 1px solid #B7D4EA;box-shadow: 0 0 8px #B7D4EA;}
+        .loginBox .loginBtn {background-image: -moz-linear-gradient(to bottom, #B5DEF2, #85CFEE); border: 1px solid #98CCE7; border-radius: 20px; box-shadow:inset rgba(255,255,255,0.6) 0 1px 1px, rgba(0,0,0,0.1) 0 1px 1px;color: #FFF; cursor: pointer; float: right;font: bold 13px Arial; padding: 5px 14px;}
+        .loginBox .loginBtn:HOVER { background-image: -moz-linear-gradient(to top, #B5DEF2, #85CFEE);}
+        .loginBox a.forgetLink { vertical-align: middle; }
+        .loginBox a.forgetLink:HOVER {  text-decoration: underline;}
+        .loginBox input#remember { vertical-align: middle;}
+        .loginBox label[for="remember"] { font: 11px Arial;}
     </style>
     <script src="assets/plugins/flot/jquery.js"></script>
 </head>
 <body>
-<div>
-    <form class="f1">
-        <fieldset>
-            <legend>用户注册</legend>
-            <table width=100%>
-                <tbody>
-                <tr>
-                    <td class=“left” width=40% align="right"><label for="studentNo">学 号：</label></td>
-                    <td class="right"><input type="text" id="studentNo" name="studentNo"></td>
-                </tr>
-                <tr>
-                    <td class=“left” width=40% align="right"><label for="userName">姓 名：</label></td>
-                    <td class="right"><input type="text" id="userName" name="userName"></td>
-                </tr>
-                <tr>
-                    <td class=“left” width=40% align="right"><label for="password">密 码：</label></td>
-                    <td class="right"><input id="password" type="password" name="password"/></td>
-                </tr>
-                <tr>
-                    <td class=“left” width=40% align="right"><label for="phoneNo">手 机：</label></td>
-                    <td class="right"><input type="text" id="phoneNo" name="phoneNo"></td>
-                </tr>
-                <tr>
-                    <td class=“left” width=40% align="right"><label for="sex2">性 别：</label></td>
-                    <td class="right"><input type="radio" id="sex1" name="sex" value="0"/> 男<!-- name设置成一样的就行了-->
-                        <input type="radio" id="sex2" name="sex" value="1"/> 女
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center"><input type="button" id="save_btn" value="提 交" onclick="submitInfo()"/>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </fieldset>
+<!--<div class="topBar">网上超市</div>-->
+<div class="wrapper">
+    <form>
+        <div class="loginBox">
+            <div class="loginBoxCenter">
+                <p><label for="userName">账 号：</label><br/><br/>
+                    <input type="text" id="userName" name="userName" class="loginInput"/></p>
+                <p><label for="studentNo">学号：</label><br/><br/>
+                    <input type="text" id="studentNo" name="studentNo" class="loginInput"/></p>
+                <p><label for="phoneNo">手机：</label><br/><br/>
+                    <input type="text" id="phoneNo" name="phoneNo" class="loginInput"/></p>
+                <p><label for="password">密 码：</label><br/><br/>
+                    <input type="password" id="password" name="password" class="loginInput"/></p>
+                <p><label for="sex2">性 别：</label>
+                    <input type="radio" id="sex1" name="sex" value="0"/> 男<!-- name设置成一样的就行了-->
+                    <input type="radio" id="sex2" name="sex" value="1"/> 女</p>
+                <p><input type="button" class="loginBtn" id="save_btn" value="注 册" onclick="submitInfo()"/></p>
+                </br>
+            </div>
+        </div>
     </form>
 </div>
+</body>
 <script type="text/javascript">
 
     function submitInfo() {
@@ -79,7 +70,7 @@
                 console.log(JSON.stringify(data));
                 if (data.code == 0) {
                     alert("注册成功!");
-                    location.href = "/quick4j/login.html";
+                    location.href = "/shop/login.html";
                 } else {
                     alert("注册失败!原因是：" + data.message);
                 }
@@ -91,5 +82,4 @@
         })
     }
 </script>
-</body>
-</html> 
+</html>

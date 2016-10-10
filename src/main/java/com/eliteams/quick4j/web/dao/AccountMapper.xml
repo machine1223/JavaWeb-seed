@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eliteams.quick4j.web.dao.AccountMapper">
+    <resultMap id="BaseResultMap" type="com.eliteams.quick4j.web.model.Account">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="buyCount" property="buyCount" jdbcType="INTEGER" />
+        <result column="total" property="total" jdbcType="DOUBLE" />
+        <result column="price" property="price" jdbcType="DOUBLE" />
+        <result column="userId" property="userId" jdbcType="BIGINT" />
+        <result column="proId" property="proId" jdbcType="BIGINT" />
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <!-- 获取某类商品列表信息 -->
+    <insert id="saveAccount" parameterType="com.eliteams.quick4j.web.model.Account" useGeneratedKeys="true" keyProperty="id">
+        insert into Account (name, buyCount,
+        total, price, proId, userId, createTime)
+        values (#{name,jdbcType=VARCHAR}, #{buyCount,jdbcType=INTEGER},
+        #{total,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE}, #{proId,jdbcType=BIGINT},#{userId, jdbcType=BIGINT}, #{createTime, jdbcType=TIMESTAMP})
+    </insert>
+
+    <!-- 获取单个商品详情 -->
+    <delete id="deleteByUserId" parameterType="Long">
+        delete from Account where userId = #{userId}
+    </delete>
+
+    <!-- 获取单个商品详情 -->
+    <select id="getAccountSlice" parameterType="Long" resultMap="BaseResultMap">
+        select * from Account where userId = #{userId}
+    </select>
+</mapper>

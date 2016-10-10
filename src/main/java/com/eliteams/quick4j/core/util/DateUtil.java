@@ -69,6 +69,17 @@ public class DateUtil {
     }
 
     /**
+     * 返回 yyyy-MM-dd hh:mm:ss
+     * @param date
+     * @return
+     */
+    public static String dateToStringStr(Date date){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateStr = dateFormat.format(date).toString();
+        return dateStr;
+    }
+
+    /**
      * 计算日期之间的天数
      * @param from
      * @param to

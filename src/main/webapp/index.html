@@ -9,11 +9,14 @@
 <script src="assets/plugins/flot/jquery.js"></script>
 <!--Jquery end-->
 <body>
-<div class="topBar"><span style="margin-left: 40%;font-size: large;">网 上 超市</span></div>
-<div class="search">
-    <div class="search1">
-        <input type="text" name="serachBox" class="serachBox" placeholder="商品名称"/><input type="button" name="searchText"
-                                                                                         class="searchText" value="搜索"/>
+<div class="topBar">
+    <div class="topCent">
+        <div class="huanYing">欢迎光临</div>
+        <div class="logo"><a href="index.html">吃货小铺</a></div>
+        <div class="topCart"><a href="cart.html">购物车</a></div>
+        <div class="topOrder"><a href="order.html">订单详情</a></div>
+        <div class="topRegister"><a href="register.html">注册</a></div>
+        <div class="topLogin"><a href="login.html">登陆</a></div>
     </div>
 </div>
 <div class="centent">
@@ -24,17 +27,17 @@
             </div>
             <div class="shopName">
                 <ol>
-                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToVeget()">蔬菜</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToFruit()">水果</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToDry()">干果</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToDrink()">饮料</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToCookie()">饼干</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToBread()">面包</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToSweet()">糖果</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToMeat()">肉类</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToSweetmeat()">蜜饯</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToChips()">薯片膨化</a></li>
-                    <li class="nameStyle"><a href="javascript:void(0);" onclick="goToJelly()">果冻布丁</a></li>
+                    <a href="javascript:void(0);" onclick="goToVeget()"><li class="nameStyle">蔬菜</li></a>
+                    <a href="javascript:void(0);" onclick="goToFruit()"><li class="nameStyle">水果</li></a>
+                    <a href="javascript:void(0);" onclick="goToDry()"><li class="nameStyle">干果</li></a>
+                    <a href="javascript:void(0);" onclick="goToDrink()"><li class="nameStyle">饮料</li></a>
+                    <a href="javascript:void(0);" onclick="goToCookie()"><li class="nameStyle">饼干</li></a>
+                    <a href="javascript:void(0);" onclick="goToBread()"><li class="nameStyle">面包</li></a>
+                    <a href="javascript:void(0);" onclick="goToSweet()"><li class="nameStyle">糖果</li></a>
+                    <a href="javascript:void(0);" onclick="goToMeat()"><li class="nameStyle">肉类</li></a>
+                    <a href="javascript:void(0);" onclick="goToSweetmeat()"><li class="nameStyle">蜜饯</li></a>
+                    <a href="javascript:void(0);" onclick="goToChips()"><li class="nameStyle">薯片膨化</li></a>
+                    <a href="javascript:void(0);" onclick="goToJelly()"><li class="nameStyle">果冻布丁</li></a>
                 </ol>
             </div>
         </div>
@@ -44,7 +47,7 @@
 </div>
 <script type="text/javascript">
     $('#super_content').load("fruit.html");//默认主页页面跳转及数据加载
-    initProList(1);
+    initProList(2);
 
     function goToVeget() {//蔬菜页面跳转
         $('#super_content').load("vegetable.html");

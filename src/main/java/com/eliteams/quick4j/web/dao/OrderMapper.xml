@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eliteams.quick4j.web.dao.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.eliteams.quick4j.web.model.Order">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="orderNum" property="orderNum" jdbcType="VARCHAR" />
+        <result column="houseNum" property="houseNum" jdbcType="VARCHAR" />
+        <result column="rangeA" property="rangeA" jdbcType="VARCHAR" />
+        <result column="rangeB" property="rangeB" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="total" property="total" jdbcType="DOUBLE" />
+        <result column="userId" property="userId" jdbcType="BIGINT" />
+        <result column="payWay" property="payWay" jdbcType="VARCHAR" />
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <!-- 获取某类商品列表信息 -->
+    <insert id="saveOrderInfo" parameterType="com.eliteams.quick4j.web.model.Order" useGeneratedKeys="true" keyProperty="id">
+        insert into Item (orderNum, houseNum,
+        rangeA, rangeB, phone, payWay,content, total, userId, createTime)
+        values (#{orderNum,jdbcType=VARCHAR}, #{houseNum,jdbcType=VARCHAR},
+        #{rangeA,jdbcType=VARCHAR}, #{rangeB,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{payWay,jdbcType=VARCHAR},
+        #{content,jdbcType=VARCHAR}, #{total,jdbcType=DOUBLE}, #{userId, jdbcType=BIGINT}, #{createTime, jdbcType=TIMESTAMP})
+    </insert>
+
+    <!-- 获取单个商品详情 -->
+    <select id="getOrderSlice" parameterType="Long" resultMap="BaseResultMap">
+        select * from Item where userId = #{userId} order by createTime asc
+    </select>
+</mapper>

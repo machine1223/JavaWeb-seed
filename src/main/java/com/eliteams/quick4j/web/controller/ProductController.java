@@ -1,13 +1,10 @@
 package com.eliteams.quick4j.web.controller;
 
 import com.eliteams.quick4j.web.model.Product;
-import com.eliteams.quick4j.web.model.User;
 import com.eliteams.quick4j.web.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.List;
 
 /**

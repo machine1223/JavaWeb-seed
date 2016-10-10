@@ -10,24 +10,42 @@
 </head>
 
 <body>
-<div class="topBar">a</div>
+<div class="topBar">
+	<div class="topCent">
+		<div class="huanYing">欢迎光临</div>
+		<div class="logo"><a href="index.html">吃货小铺</a></div>
+		<div class="topCart"><a href="cart.html">购物车</a></div>
+		<div class="topOrder"><a href="order.html">订单详情</a></div>
+		<div class="topRegister"><a href="register.html">注册</a></div>
+		<div class="topLogin"><a href="login.html">登陆</a></div>
+	</div>
+</div>
 <div class="centent">
 	<div class="introduce">
 		<div class="productLeft">
 			<div class="productImg"><img src="" id="pro_image"></div>
 		</div>
-		<div class="productRight">
+		<div class="productLeft">
 			<div class="productInfo">
-				<div class="productName" id="proName"></div>
-				<div class="productState"></div>
-				<div class="productPrice" id="proPrice"></div>
-				<div class="productNum" id="proCount">
-					数量：
-
+				<div class="product_Info proName" id="proName"></div>
+				<div class="product_Info">
+					<div class="proPrice">
+						单价：&nbsp;
+						<span class="priceRmb" id="proPrice"></span>
+					</div>
 				</div>
-				<div class="productBuy">
-					<input type="submit" name="shopCar" value="加入购物车" />&nbsp;&nbsp;&nbsp;
-					<input type="submit" name="buyAccount" value="立即购买" />
+				<div class="product_Info">
+					<div class="productNum">数量：&nbsp;</div>
+					<div class="productNum">
+						<input type="button" class="productButton" value="-" id="numSub" onclick="numSub()"/>
+						<input type="text" class="productInput" id="productInput" value="1" maxlength="8" title="请输入购买量">
+						<input type="button" class="productButton" value="+" id="numSum" onclick="numSum()"/>
+						<label class="proCount" id="proCount"></label>
+					</div>
+				    </div>
+					<div class="product_Info">
+					<input type="submit" name="shopCar" value="加入购物车" class="shopCar" onclick="shopCar()"/>&nbsp;&nbsp;&nbsp;
+					<input type="submit" name="buyAccount" value="立即购买" class="buyAccount" onclick="buyAccount()"/>
 				</div>
 			</div>
 		</div>
@@ -42,6 +60,7 @@
 	}
 
 	var id = getParameterByName("id");
+	var proCount;//库存量
 	getProductDetail(id);
 	function getProductDetail(value) {
 		$.ajax({
@@ -54,12 +73,82 @@
 	}
 
 	function displayProDetail(data){
+		proCount = data.count;
 		$('#pro_image').attr("src", data.imageUrl);
-		$('#proCount').html(data.count);
+		$('#proCount').html("库存量："+data.count+"件");
 		$('#proName').html(data.name);
-		$('#proPrice').html(data.price);
+		$('#proPrice').html("¥"+"  "+data.price);
 	}
 
+	function numSub() {
+		var getNum = parseInt($('#productInput').val());
+		if(getNum >0){
+			$('#productInput').val(getNum - 1);
+		}
+		else {
+			alert("不可以小于0");
+		}
+	}
+	function numSum() {
+		var getNum = parseInt($('#productInput').val());
+//		var maxNum = parseInt($('#proCount').html());
+		console.log(proCount);
+		if(proCount > getNum){
+			$('#productInput').val(getNum + 1);
+		}
+		else{
+			alert("最大值不可以多于库存哦");
+		}
+	}
+
+	function shopCar() {//添加购物车
+		$.ajax({
+			async:false,
+			type: "POST",
+			url: "rest/cart/info",
+			data: JSON.stringify({
+				"proId": id,//商品编号
+				"buyCount": $('#productInput').val(),//购买数量
+				"userId": 6,//吕文芳id
+			}),
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
+			success: function (data) {
+				console.log(JSON.stringify(data));
+				if (data.code == 0) {
+					alert("添加购物车成功！请到购物车查看");
+				}
+			},
+			error: function (XMLHttpRequest, textStatus, errorThrown) {
+				alert(errorThrown);
+			}
+		})
+	}
+
+	function buyAccount() {
+		$.ajax({
+			async:false,
+			type: "POST",
+			url:"rest/account/direct",
+			data: JSON.stringify({
+			"userId": 6,//吕文芳id
+			"selectArray": [id],//立即购买商品,商品id
+			"buyCount": $('#productInput').val()//购买数量
+		}),
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
+			success: function (data) {
+			console.log(JSON.stringify(data));
+			if (data.code == 0) {
+				location.href = "/shop/account.html";
+			}
+		},
+		error: function (XMLHttpRequest, textStatus, errorThrown) {
+			alert(errorThrown);
+		}
+	})
+
+	}
 </script>
 </body>
 </html>

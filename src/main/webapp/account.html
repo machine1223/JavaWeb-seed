@@ -2,94 +2,195 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="styles/page.css">
-<title>结算页</title>
+    <link rel="stylesheet" type="text/css" href="styles/page.css">
+	<script src="js/jquery.min.js"></script>
+	<link type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+	<link href="css/bootstrap.min.css" rel="stylesheet" />
+	<link href="css/dataTables.bootstrap.css" rel="stylesheet" />
+	<script src="js/bootstrap.min.js"></script>
+	<!-- DataTables Needed Scripts -->
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/dataTables.bootstrap.min.js"></script>
+
+	<script src="js/main.js"></script>
+	<title>结算页</title>
 </head>
 
 <body>
-<div class="topBar">a</div>
+<div class="topBar">
+	<div class="topCent">
+		<div class="huanYing">欢迎光临</div>
+		<div class="logo"><a href="index.html">吃货小铺</a></div>
+		<div class="topCart"><a href="cart.html">购物车</a></div>
+		<div class="topOrder"><a href="order.html">订单详情</a></div>
+		<div class="topRegister"><a href="register.html">注册</a></div>
+		<div class="topLogin"><a href="login.html">登陆</a></div>
+	</div>
+</div>
 <div class="centent">
   <div class="centent1">
     <div class="orderInfo">
-	  <div class="orderName">送货清单</div>
+	  <div class="orderName">结算详情</div>
 	  <div class="orderCent">
-	    <div class="centTop">
-		  <ul class="listOrder">
-		    <li class="itemLogo">商品图标</li>
-			<li class="itemName">商品名称</li>
-			<li class="itemNum">商品数量</li>
-			<li class="itemPrice">商品单价</li>
-			<li class="itenAccount">商品总价</li>
-		  </ul>
-		</div>
-	    <div class="centCenter">
-		 <div class="centOne">
-		    <ul class="listOrder">
-		    <li class="itemLogo"></li>
-			<li class="itemName"></li>
-			<li class="itemNum"></li>
-			<li class="itemPrice"></li>
-			<li class="itenAccount"></li>
-		  </ul>
-		 </div>
-		 <div class="centOne">
-		  <ul class="listOrder">
-		    <li class="itemLogo"></li>
-			<li class="itemName"></li>
-			<li class="itemNum"></li>
-			<li class="itemPrice"></li>
-			<li class="itenAccount"></li>
-		  </ul>
-		 </div>
-		</div>
-		<div class="cenBottom">
-		  <input type="button" name="pageTurn" value="下一页" />
-		</div>
+		  <table id="account" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+			  <thead>
+			  <tr>
+				  <th>编号</th>
+				  <th>名称</th>
+				  <th>单价</th>
+				  <th>数量</th>
+				  <th style="width: 10%;">总价</th>
+			  </tr>
+			  </thead>
+		  </table>
 	  </div>
 	</div>
     <div class="address">
 	  <div class="addName">收货信息</div>
 	  <div class="addCent">
-	    <form class="#">
-		  <p>
-		    选择地区：
-		    <select name="add1">
-              <option value="village">校内</option>
-              <option value="city">学生生活城</option>
-            </select>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		    楼&nbsp;&nbsp;号：
-		    <select name="building">
-		      <option value="A">A座</option>
-		      <option value="B">B座</option>
-		      <option value="C">C座</option>
-		      <option value="D">D座</option>
-		      <option value="E">E座</option>
-		    </select>
-		 </p>
-		 <p>
-		   寝室号&nbsp;： <input type="text" name="houseNum" />
-		   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		   手机号&nbsp;：<input type="text" name="phone"/>
-		 </p>
-		</form>
+		  <form name="frm">
+			  <p>
+				  范&nbsp;&nbsp;围：
+				  <select name="rangeA" id="rangeA" onchange="redirec(document.frm.rangeA.options.selectedIndex)">
+					  <option selected>请选择</option>
+					  <option value="校内宿舍">校内宿舍</option>
+					  <option value="学生生活城">学生生活城</option>
+				  </select>
+				  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				  楼&nbsp;&nbsp;号：
+				  <select name="building" id="building">
+					  <option value="请选择" selected>-请选择-</option>
+				  </select>
+			  </p>
+			  <p>
+				  寝室号&nbsp;： <input type="text" name="houseNum" id="houseNum"/>
+				  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				  手机号&nbsp;：<input type="text" name="phone" id="phone"/>
+			  </p>
+		  </form>
 	  </div>
 	 </div>
 	<div class="pay">
 	  <div class="payName">支付方式</div>
 	  <div class="payCent">
-	    <form>
 		  <p><input type="radio" name="payWay" value="微信支付" />微信支付</p>
 		  <p> <input type="radio" name="payWay" value="支付宝支付" />支付宝支付</p>
 		  <p><input type="radio" name="payWay" value="货到付款" />货到付款</p>
-		</form>
 	  </div>
 	</div>
 	<div class="detail">
-	  <div class="money"></div>
-	  <div class="subButton"><input type="submit" name="payMoney" value="付款" /></div>
+	  <div class="money" id="total"></div>
+	  <div class="subButton"><button type="button" name="payMoney" id="pay_btn" class="btn-success" onclick="payIt()" >付  款</button></div>
 	</div>
   </div>	  
 </div>
 </body>
+<script>
+	getAccountSlice();
+	getTotalAccount();
+
+	var totalPrice;
+	function getAccountSlice(){
+		$('#account').DataTable({
+			sDom: "Tft<'row DTTTFooter'<'col-sm-6'i><'col-sm-6'p>>",
+			bInfo: true,
+			bFilter: false,
+			iDisplayLength: 10,
+			bPaginate: true,
+			bServerSide: false,
+			sAjaxSource: "rest/account/all?userId=" + 6,
+			fnServerData: getDataFromServerSideForDataTable,
+			aoColumns: [
+				{
+					mData: "id",
+					sClass: "text-center"
+				},
+				{
+					mData: "name",
+					sClass: "text-center"
+				},{
+					mData: "price",
+					sClass: "text-center"
+				},{
+					mData: "buyCount",
+					sClass: "text-center"
+				}, {
+					mData: "total",
+					sClass: "text-center"
+				}
+			]
+		});
+	}
+
+	function getTotalAccount(value) {
+		$.ajax({
+			url: "rest/account/total?userId=" + 6,
+			type: 'GET',
+			success: function (data) {
+				var total = data.data;
+				totalPrice = total.toFixed(2);
+				$('#total').html("合计:" + total.toFixed(2) + "元");
+			}
+		})
+	}
+
+	function payIt(){
+		$.ajax({
+			type: "POST",
+			url:"rest/item/build",
+			data: JSON.stringify({
+				"userId": 6,//吕文芳id
+				"houseNum": $('#houseNum').val(),//立即购买商品,商品id
+				"phone": $('#phone').val(),//购买数量
+				"payWay": $("input[name='payWay']:checked").val(),
+				"rangeA": $('#rangeA').val(),
+				"rangeB": $('#building').val(),
+				"total": totalPrice
+			}),
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
+			success: function (data) {
+				console.log(JSON.stringify(data));
+				if (data.code == 0) {
+					location.href = "/shop/order.html";
+				}
+			},
+			error: function (XMLHttpRequest, textStatus, errorThrown) {
+				alert(errorThrown);
+			}
+		})
+	}
+
+	var select1_len = document.frm.rangeA.options.length;
+	var select2 = new Array(select1_len);
+	//把一级菜单都设为数组
+	for (i=0; i<select1_len; i++)
+	{
+		select2[i] = new Array();
+	}
+	//定义基本选项
+	select2[0][0] = new Option("请选择", " ");
+
+	select2[1][0] = new Option("校内1舍", "校内1舍");
+	select2[1][1] = new Option("校内2舍", "校内2舍");
+	select2[1][2] = new Option("校内3舍", "校内3舍");
+
+	select2[2][0] = new Option("生活城A座", "生活城A座");
+	select2[2][1] = new Option("生活城B座", "生活城A座");
+	select2[2][2] = new Option("生活城C座", "生活城A座");
+	//	select2[2][3] = new Option("生活城D座", " ");
+	//	select2[2][4] = new Option("生活城E座", " ");
+	//	select2[2][5] = new Option("生活城F座", " ");
+
+	//联动函数
+	function redirec(x)
+	{
+		var temp = document.frm.building;
+		for (i=0;i<select2[x].length;i++)
+		{ temp.options[i]=new Option(select2[x][i].text,select2[x][i].value);}
+		temp.options[0].selected=true;
+	}
+
+
+</script>
 </html>
